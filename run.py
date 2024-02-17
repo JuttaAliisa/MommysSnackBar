@@ -161,4 +161,9 @@ def restock():
     
     print(quantities)
 
+    # Add the values to the next available row
+    worksheet = SHEET.worksheet('restock')
+    next_row = len(worksheet.get_all_values()) + 1
+    worksheet.append_row(quantities)
+
 restock()
