@@ -71,7 +71,7 @@ def stock():
     restock_sheet = SHEET.worksheet('restock').get_all_values()
     stock_sheet = SHEET.worksheet('stock')
 
-    # Get the values from the second row of "usage" and "restock" sheets
+    # Get the values from the "usage" and "restock" sheets
     usage_values = usage_sheet.row_values(2)
     restock_values = restock_sheet[-1]
 
@@ -93,6 +93,41 @@ def stock():
     for product, amount in zip(products, amounts):
         print(f"{product}: {amount}pc")
         
+def recommendation():
+    """
+    Function to calculate purchase recommendation
+    """
+    # Select the appropriate worksheet
+    usage_sheet = SHEET.worksheet('usage')
+    stock_sheet = SHEET.worksheet('stock').get_all_values()
+    recommendation_sheet = SHEET.worksheet('recommendation')
 
+    # Get the values from the "usage" and "stock" sheets
+    usage_values = usage_sheet.row_values(2)
+    stock_values = stock_sheet[-1]
     
-stock()
+    # Convert the values to integers
+    usage_values = [int(value) for value in usage_values]
+    stock_values = [int(value) for value in stock_values]
+
+    # Calculate the difference between usage and stock
+    recommendation_values = [usage - stock for usage, stock in zip(usage_values, stock_values)]
+    print(recommendation_values)
+
+    # Add the values to the next available row
+    worksheet = SHEET.worksheet('recommendation')
+    next_row = len(worksheet.get_all_values()) + 1
+    worksheet.append_row(recommendation_values)
+
+    #print user friendly recommendation list
+    products = recommendation_sheet.row_values(1)
+    recommendation_sheet = SHEET.worksheet('recommendation').get_all_values()
+    amounts = recommendation_sheet[-1]
+    amounts = [int(value) for value in amounts]
+    for product, amount in zip(products, amounts):
+        if amount < 0:
+            print(f"{product}: {amount}pc")
+        else:
+            print(f"{product} has enough stock")
+
+recommendation()
