@@ -129,4 +129,27 @@ def recommendation():
         else:
             print(f"{product} has enough stock")
 
-recommendation()
+def restock():
+    """
+    Function to perform restock of the snack bar
+    """
+    print("Welcome to restock feature!")
+
+    # Select the appropriate worksheet
+    restock_sheet = SHEET.worksheet('restock')
+    usage_sheet = SHEET.worksheet('usage')
+    stock_sheet = SHEET.worksheet('stock')
+
+    # Wipe out usage sheet
+    # Get all values in the worksheet
+    all_values = usage_sheet.get_all_values()
+    # Loop through each row starting from the second row
+    for i in range(1, len(all_values)):
+        # Loop through each cell in the row
+        for j in range(len(all_values[i])):
+            # Check if the cell value is a number and delete it
+            if all_values[i][j].replace('.', '', 1).isdigit():
+                usage_sheet.update_cell(i + 1, j + 1, '')
+
+    #request restock amounts
+restock()
