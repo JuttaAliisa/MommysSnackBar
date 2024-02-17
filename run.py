@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from os import system, name
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -11,6 +12,12 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('mommys_snackbar_helper')
+
+def clear():
+    '''
+    Clears terminal
+    '''
+    system('cls' if name == 'nt' else 'clear')
 
 def consumption():
     """
@@ -167,6 +174,7 @@ def restock():
     worksheet.append_row(quantities)
 
 def start():
+    clear()
     print("Welcome to Mommy's SnackBar Stock Helper")
     print("Help Mom and log your activity around snack bar.")
     print("This way we can make sure none of is left with out a snack aver again!")
