@@ -28,7 +28,13 @@ def consumption():
 
     # Get user input
     print('When taking a snack from the stock, please insert correct number for the snack')
-    user_choice = input("Enter number: ")
+    
+    products = worksheet.row_values(1)
+    numbers = [1, 2, 3, 4, 5, 6]
+    for product, number in zip(products, numbers):
+        print(f"{product} = {number}")
+    
+    user_choice = input("What did you take? Enter number: ")
 
     # Define the values based on user input
     if user_choice == '1':
@@ -198,4 +204,5 @@ def start():
     else:
         print("Invalid choice. Please enter a number between 1 and 4")
         exit()
-start()
+
+consumption()
