@@ -62,5 +62,32 @@ def consumption():
         print("Invalid choice. Please enter y or n: ")
         exit()
 
+def stock():
+    """
+    Function to check current stock value
+    """
+    # Select the appropriate worksheet
+    usage_sheet = SHEET.worksheet('usage')
+    restock_sheet = SHEET.worksheet('restock').get_all_values()
+    stock_sheet = SHEET.worksheet('stock')
 
-consumption()
+    # Get the values from the second row of "usage" and "restock" sheets
+    usage_values = usage_sheet.row_values(2)
+    restock_values = restock_sheet[-1]
+
+    # Convert the values to integers
+    usage_values = [int(value) for value in usage_values]
+    restock_values = [int(value) for value in restock_values]
+
+    print(usage_values)
+    print(restock_values)
+
+    # Calculate the difference between restock and usage
+    stock_values = [restock - usage for restock, usage in zip(restock_values, usage_values)]
+    print(stock_values)
+
+    # Update the "stock" sheet with the calculated values in the second row
+    # stock_sheet.update("A2:D2", [stock_values])
+
+    
+stock()
