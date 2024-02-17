@@ -152,4 +152,13 @@ def restock():
                 usage_sheet.update_cell(i + 1, j + 1, '')
 
     #request restock amounts
+    products = restock_sheet.row_values(1)
+    quantities = []
+
+    for product in products:
+        quantity = int(input(f"How many {product}s restocked: "))
+        quantities.append(quantity)
+    
+    print(quantities)
+
 restock()
