@@ -112,7 +112,6 @@ def recommendation():
 
     # Calculate the difference between usage and stock
     recommendation_values = [usage - stock for usage, stock in zip(usage_values, stock_values)]
-    print(recommendation_values)
 
     # Add the values to the next available row
     worksheet = SHEET.worksheet('recommendation')
@@ -125,7 +124,7 @@ def recommendation():
     amounts = recommendation_sheet[-1]
     amounts = [int(value) for value in amounts]
     for product, amount in zip(products, amounts):
-        if amount < 0:
+        if amount > 0:
             print(f"{product}: {amount}pc")
         else:
             print(f"{product} has enough stock")
