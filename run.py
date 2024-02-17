@@ -21,7 +21,7 @@ def clear():
 
 def consumption():
     """
-    function for inputtin consumption values
+    function for inputting consumption values
     """
     # Select the appropriate worksheet
     worksheet = SHEET.worksheet('usage')
@@ -33,7 +33,7 @@ def consumption():
     numbers = [1, 2, 3, 4, 5, 6]
     for product, number in zip(products, numbers):
         print(f"{product} = {number}")
-    
+
     user_choice = input("What did you take? Enter number: ")
 
     # Define the values based on user input
@@ -68,17 +68,21 @@ def consumption():
     print('Do you want to take out another item?')
     user_choice = input("y=yes, n=no: ")
     if user_choice == 'y':
+        print("Please pick another item")
         consumption()
     elif user_choice == 'n':
+        print("Thank you for your contribution!")
         start()
     else:
         print("Invalid choice. Please enter y or n: ")
-        exit()
 
 def stock():
     """
     Function to check current stock value
     """
+    print("")
+    print("The current stock is:")
+    print("")
     # Select the appropriate worksheet
     usage_sheet = SHEET.worksheet('usage')
     restock_sheet = SHEET.worksheet('restock').get_all_values()
@@ -110,6 +114,10 @@ def recommendation():
     """
     Function to calculate purchase recommendation
     """
+    print("")
+    print("Please consider purchasing the following snacks to make sure the stock lasts:")
+    print("")
+
     # Select the appropriate worksheet
     usage_sheet = SHEET.worksheet('usage')
     stock_sheet = SHEET.worksheet('stock').get_all_values()
@@ -147,6 +155,9 @@ def restock():
     Function to perform restock of the snack bar
     """
     print("Welcome to restock feature!")
+    print("")
+    print("Please add stocked amount for every item")
+    print("")
 
     # Select the appropriate worksheet
     restock_sheet = SHEET.worksheet('restock')
