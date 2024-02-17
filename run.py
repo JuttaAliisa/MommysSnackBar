@@ -16,14 +16,14 @@ def consumption():
     """
     function for inputtin consumption values
     """
-# Select the appropriate worksheet
+    # Select the appropriate worksheet
     worksheet = SHEET.worksheet('usage')
 
-# Get user input
+    # Get user input
     print('When taking a snack from the stock, please insert correct number for the snack')
     user_choice = input("Enter number: ")
 
-# Define the values based on user input
+    # Define the values based on user input
     if user_choice == '1':
         values_to_add = [1, 0, 0, 0, 0, 0]
         cell_value = worksheet.cell(1, 1).value
@@ -166,4 +166,28 @@ def restock():
     next_row = len(worksheet.get_all_values()) + 1
     worksheet.append_row(quantities)
 
-restock()
+def start():
+    print("Welcome to Mommy's SnackBar Stock Helper")
+    print("Help Mom and log your activity around snack bar.")
+    print("This way we can make sure none of is left with out a snack aver again!")
+    print("")
+    print("Would you like to:")
+    print("1: Take a snack")
+    print("2: Restock snacks")
+    print("3: Check current stock")
+    print("4: Get shopping recommendations")
+    user_choice = input("Enter number: ")
+
+    # Define the values based on user input
+    if user_choice == '1':
+        consumption()
+    elif user_choice == '2':
+        restock()
+    elif user_choice == '3':
+        stock()
+    elif user_choice == '4':
+        recommendation()
+    else:
+        print("Invalid choice. Please enter a number between 1 and 4")
+        exit()
+start()
