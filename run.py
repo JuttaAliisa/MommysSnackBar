@@ -79,15 +79,20 @@ def stock():
     usage_values = [int(value) for value in usage_values]
     restock_values = [int(value) for value in restock_values]
 
-    print(usage_values)
-    print(restock_values)
-
     # Calculate the difference between restock and usage
     stock_values = [restock - usage for restock, usage in zip(restock_values, usage_values)]
-    print(stock_values)
-
-    # Update the "stock" sheet with the calculated values in the second row
-    # stock_sheet.update("A2:D2", [stock_values])
+    # Add the values to the next available row
+    worksheet = SHEET.worksheet('stock')
+    next_row = len(worksheet.get_all_values()) + 1
+    worksheet.append_row(stock_values)
+    
+    #print user friendly stock values
+    products = stock_sheet.row_values(1)
+    stock_sheet = SHEET.worksheet('stock').get_all_values()
+    amounts = stock_sheet[-1]
+    for product, amount in zip(products, amounts):
+        print(f"{product}: {amount}pc")
+        
 
     
 stock()
