@@ -168,7 +168,7 @@ def restock():
     # Get all values in the worksheet
     all_values = usage_sheet.get_all_values()
     # Loop through each row starting from the second row
-    for i in range(1, len(all_values)):
+    for i in range(2, len(all_values)):
         # Loop through each cell in the row
         for j in range(len(all_values[i])):
             # Check if the cell value is a number and delete it
@@ -216,4 +216,4 @@ def start():
         print("Invalid choice. Please enter a number between 1 and 4")
         exit()
 
-consumption()
+start()
