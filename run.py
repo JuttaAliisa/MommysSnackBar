@@ -45,7 +45,7 @@ def consumption(usage_sheet, stock_sheet):
 
     user_choice = input("What did you take? Enter number: \n")
 
-    # Define the values based on user input and validating input
+    # Define the values based on user input
     if user_choice == '1':
         values_to_add = [1, 0, 0, 0, 0, 0]
         cell_value = usage_sheet.cell(1, 1).value
@@ -73,9 +73,9 @@ def consumption(usage_sheet, stock_sheet):
         consumption(spreadsheet.worksheet('usage'))
 
 
-    # Add the values to the next available row
+    # Add the values to the next available row to usage sheet
     usage_sheet.append_row(values_to_add)
-    # Turn the value negative and add to stock sheet
+    # Turn the value negative and add to stock sheet as a new row
     negative_values = [-x for x in values_to_add]
     stock_sheet.append_row(negative_values)
 
@@ -94,13 +94,13 @@ def consumption(usage_sheet, stock_sheet):
 
         if user_choice == 'y':
             consumption(spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
-            break  # exit the loop after consumption
+            break 
         elif user_choice == 'n':
             print("Thank you for your contribution!\n")
             print("Press enter to get back to start\n")
             input()
             start()
-            break  # exit the loop after starting again
+            break
         else:
             print(Fore.RED)
             print("Invalid choice. Please enter y or n: ")
@@ -129,7 +129,9 @@ def stock(worksheet):
         
 def recommendation(usage_sheet, stock_sheet, recommendation_sheet):
     """
-    Function to calculate purchase recommendation
+    Function to calculate purchase recommendation.
+    This is based on usage compared to most recent restock
+    The number will change based on usage and size of restock.
     """
     #clear terminal for better readability
     clear()
@@ -139,7 +141,7 @@ def recommendation(usage_sheet, stock_sheet, recommendation_sheet):
     print("Please consider purchasing the following snacks to make sure the stock lasts:")
     print(Fore.GREEN)
     
-    # Get the values from the "usage" and "stock" sheets
+    # Get the values from the sheets
     usage_values = usage_sheet.row_values(2)
     stock_values = stock_sheet.row_values(2)
     
@@ -154,7 +156,7 @@ def recommendation(usage_sheet, stock_sheet, recommendation_sheet):
     # Add the values to the next available row
     recommendation_sheet.update([recommendation_values], 'A2')
 
-    #print user friendly recommendation list
+    #print reader friendly recommendation list
     products = recommendation_sheet.row_values(1)
     amounts = recommendation_values
     for product, amount in zip(products, amounts):
@@ -181,7 +183,7 @@ def restock(restock_sheet, usage_sheet, stock_sheet):
     print(Style.RESET_ALL)
     print(Fore.GREEN)
 
-    # Get the header row as a list of Cell objects
+    # Get the header row objects
     header_row = restock_sheet.row_values(1)
     header_cells = restock_sheet.range(2, 1, 2, len(header_row))
 
@@ -191,24 +193,26 @@ def restock(restock_sheet, usage_sheet, stock_sheet):
     # Get all values in the usage sheet
     all_usage_values = usage_sheet.get_all_values()
 
-    # Get restock amounts from the user with input validation
+    # Get restock amounts from the user
     for i, product in enumerate(header_row):
         while True:
             try:
-                quantity = int(input(f"How many {product}s restocked: \n"))
-                # Check if the input is non-negative
+                quantity = int(input(Fore.GREEN + f"How many {product}s restocked: \n"))
+                # Check if the input is positive
                 if quantity >= 0:
                     break
                 else:
                     print(Fore.RED)
-                    print("Please enter a non-negative number.")
+                    print("Please enter a positive number.")
                     print(Style.RESET_ALL)
             except ValueError:
                 print(Fore.RED)
                 print("Invalid input. Please enter a valid number.")
                 print(Style.RESET_ALL)
 
-        # Check if the input is non-zero before updating the cells
+        # Check the input is not a zero before updating the cells
+        # Only update if not zero
+        # This way the latest restock is always a positive number as 0 really isn't a restock
         if quantity != 0:
             header_cells[i].value = quantity
             for j in range(2, len(all_usage_values)):
@@ -249,7 +253,7 @@ def start():
 
         spreadsheet = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
 
-        # Define the values based on user input
+        # Define the action based on user input
         if user_choice == '1':
             consumption(spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
         elif user_choice == '2':
@@ -262,11 +266,15 @@ def start():
             stocktaking(spreadsheet)
         else:
             print("Invalid choice. Please enter a number between 1 and 5")
-            continue  # Go back to the beginning of the loop for a new input
+            continue
 
-        break  # Exit the loop if a valid choice is made
+        break  # Exit the loop 
 
 def stocktaking(spreadsheet):
+    """
+    Stocktaking gives opportunity to reset the stock and usage in case the user feels like the numbers are not correct. This feature will delete usage, stock and
+     previous restock data. It gives a clean start for the stock
+    """
     #clear terminal for better readability
     clear()
 
@@ -286,7 +294,7 @@ def stocktaking(spreadsheet):
 
         if user_choice == 'y':
 
-            # Define the ranges to clear
+            # Define the ranges for clearing
             usage_range = 'A3:ZZ'
             stock_range = 'A3:ZZ'
             restock_range = 'A2:ZZ'
