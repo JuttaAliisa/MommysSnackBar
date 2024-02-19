@@ -31,7 +31,12 @@ def consumption():
     worksheet = SHEET.worksheet('usage')
 
     # Get user input
-    print('\n When taking a snack from the stock, please insert correct number for the snack \n')
+    print(Fore.MAGENTA)
+    print(Style.BRIGHT + "Snack Consumption logging \n")
+    print(Style.RESET_ALL)
+    print(Fore.BLUE)
+    print('When taking a snack from the stock, please insert correct number for the snack \n')
+    print(Style.RESET_ALL)
     
     products = worksheet.row_values(1)
     numbers = [1, 2, 3, 4, 5, 6]
@@ -39,7 +44,7 @@ def consumption():
         print("\033[32m" + f"{product} = {number}")
         print('\033[39m')
 
-    user_choice = input("\n What did you take? Enter number: ")
+    user_choice = input("What did you take? Enter number: ")
 
     # Define the values based on user input and validating input
     if user_choice == '1':
@@ -61,7 +66,7 @@ def consumption():
         values_to_add = [0, 1, 0, 0, 0, 1]
         cell_value = worksheet.cell(1, 6).value
     else:
-        print("\033[31m" + "Invalid choice. Please enter a number from 1 through 6 \n")
+        print("\033[31m" + "\nInvalid choice. Please enter a number from 1 through 6 \n")
         print("\033[39m")
         print("Press enter to try again")
         input()
@@ -72,35 +77,28 @@ def consumption():
     next_row = len(worksheet.get_all_values()) + 1
     worksheet.append_row(values_to_add)
 
-    print(f"\n Thank you! 1pc of {cell_value} deleted from SnackBar stock \n")
+    print(f"\nThank you! 1pc of {cell_value} deleted from SnackBar stock \n")
     print('Do you want to take out another item? \n')
-    user_choice = input("y=yes, n=no: ")
-    if user_choice == 'y':
-        print("\n Please pick another item \n")
-        consumption()
-    elif user_choice == 'n':
-        print("\n Thank you for your contribution! \n")
-        print("\n Press enter to get back to start")
-        input("")
-        start()
-    else:
-        print('\033[31m' + "Invalid choice. Please enter y or n: ")
-        print('\033[39m')
-        print('Do you want to take out another item? \n')
+
+    def get_user_choice():
         user_choice = input("y=yes, n=no: ")
+        return user_choice.lower()
+
+
+    while True:
+        user_choice = get_user_choice()
+
         if user_choice == 'y':
-            print("\n Please pick another item \n")
             consumption()
+            break  # exit the loop after consumption
         elif user_choice == 'n':
-            print("\n Thank you for your contribution! \n")
-            print("\n Press enter to get back to start")
+            print("Thank you for your contribution!\n")
+            print("Press enter to get back to start\n")
             input("")
             start()
+            break  # exit the loop after starting again
         else:
-            print('\033[31m' + "Invalid choice. Press enter to start again ")
-            print('\033[39m')
-            input("")
-            start()
+            print('\033[31m' + "Invalid choice. Please enter y or n: " + '\033[39m')
 
 def stock():
     """
