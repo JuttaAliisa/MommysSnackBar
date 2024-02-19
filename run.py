@@ -161,8 +161,7 @@ def recommendation():
     recommendation_values = [usage - stock for usage, stock in zip(usage_values, stock_values)]
 
     # Add the values to the next available row
-    worksheet = SHEET.worksheet('recommendation')
-    worksheet.append_row(recommendation_values)
+    recommendation_sheet.update('A2', [recommendation_values])
 
     #print user friendly recommendation list
     products = recommendation_sheet.row_values(1)
