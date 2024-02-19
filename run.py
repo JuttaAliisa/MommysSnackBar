@@ -158,7 +158,8 @@ def recommendation():
     stock_values = [int(value) for value in stock_values]
 
     # Calculate the difference between usage and stock
-    recommendation_values = [usage - stock for usage, stock in zip(usage_values, stock_values)]
+    # If stock has gone to 0, we will add one to cover increasing demand
+    recommendation_values = [usage - stock + 1 if stock == 0 else usage - stock for usage, stock in zip(usage_values, stock_values)]
 
     # Add the values to the next available row
     recommendation_sheet.update('A2', [recommendation_values])
