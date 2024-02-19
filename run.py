@@ -233,7 +233,7 @@ def start():
     print("Welcome to Mommy's SnackBar Stock Helper")
     print(Style.RESET_ALL)
     print("Help Mom and log your activity around snack bar.")
-    print("This way we can make sure none of is left with out a snack aver again!")
+    print("This way we can make sure none of us is left with out a snack ever again!")
     print(Fore.GREEN)
     print("Would you like to:")
     print("1: Take a snack")
@@ -242,26 +242,29 @@ def start():
     print("4: Get shopping recommendations")
     print("5: Stocktaking")
     print(Style.RESET_ALL)
-    print(Fore.BLUE)
-    user_choice = input("Enter number: \n")
-    print(Style.RESET_ALL)
+    while True:
+        print(Fore.BLUE)
+        user_choice = input("Enter number: ")
+        print(Style.RESET_ALL)
 
-    spreadsheet = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
+        spreadsheet = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
 
-    # Define the values based on user input
-    if user_choice == '1':
-        consumption(spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
-    elif user_choice == '2':
-        restock(spreadsheet.worksheet('restock'), spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
-    elif user_choice == '3':
-        stock(spreadsheet.worksheet('stock'))
-    elif user_choice == '4':
-        recommendation(spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'), spreadsheet.worksheet('recommendation'))
-    elif user_choice == '5':
-        stocktaking(spreadsheet)
-    else:
-        print("Invalid choice. Please enter a number between 1 and 4")
-        exit()
+        # Define the values based on user input
+        if user_choice == '1':
+            consumption(spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
+        elif user_choice == '2':
+            restock(spreadsheet.worksheet('restock'), spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
+        elif user_choice == '3':
+            stock(spreadsheet.worksheet('stock'))
+        elif user_choice == '4':
+            recommendation(spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'), spreadsheet.worksheet('recommendation'))
+        elif user_choice == '5':
+            stocktaking(spreadsheet)
+        else:
+            print("Invalid choice. Please enter a number between 1 and 5")
+            continue  # Go back to the beginning of the loop for a new input
+
+        break  # Exit the loop if a valid choice is made
 
 def stocktaking(spreadsheet):
     #clear terminal for better readability
