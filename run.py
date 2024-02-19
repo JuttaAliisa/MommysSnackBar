@@ -118,33 +118,15 @@ def stock():
     print(Style.BRIGHT + "The current stock is: \n")
     print(Style.RESET_ALL)
     # Select the appropriate worksheet
-    usage_sheet = SHEET.worksheet('usage')
-    restock_sheet = SHEET.worksheet('restock').get_all_values()
     stock_sheet = SHEET.worksheet('stock')
-
-    # Get the values from the "usage" and "restock" sheets
-    usage_values = usage_sheet.row_values(2)
-    restock_values = restock_sheet[-1]
-
-    # Convert the values to integers
-    usage_values = [int(value) for value in usage_values]
-    restock_values = [int(value) for value in restock_values]
-
-    # Calculate the difference between restock and usage
-    stock_values = [restock - usage for restock, usage in zip(restock_values, usage_values)]
-    # Add the values to the next available row
-    worksheet = SHEET.worksheet('stock')
-    next_row = len(worksheet.get_all_values()) + 1
-    worksheet.append_row(stock_values)
     
+    print(Fore.GREEN)
     #print user friendly stock values
     products = stock_sheet.row_values(1)
-    stock_sheet = SHEET.worksheet('stock').get_all_values()
-    amounts = stock_sheet[-1]
+    amounts = stock_sheet.row_values(2)
     for product, amount in zip(products, amounts):
-        print(Fore.GREEN)
         print(f"{product}: {amount}pc")
-        print(Style.RESET_ALL)
+    print(Style.RESET_ALL)
 
     print("\nPress enter to go back to main page")
     input()
