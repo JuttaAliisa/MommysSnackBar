@@ -214,6 +214,37 @@ def restock():
     usage_sheet = SHEET.worksheet('usage')
     stock_sheet = SHEET.worksheet('stock')
 
+    # Get the header row as a list of Cell objects
+    header_row = restock_sheet.row_values(1)
+    header_cells = restock_sheet.range(2, 1, 2, len(header_row))
+
+    # Get all values in the usage sheet
+    all_usage_values = usage_sheet.get_all_values()
+
+    # Get restock amounts from the user with input validation
+    for i, product in enumerate(header_row):
+        while True:
+            try:
+                quantity = int(input(f"How many {product}s restocked: "))
+                # Check if the input is non-negative
+                if quantity >= 0:
+                    break
+                else:
+                    print("Please enter a non-negative number.")
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
+        # Check if the input is non-zero before updating the cell
+        if quantity != 0:
+            header_cells[i].value = quantity
+            for j in range(2, len(all_usage_values)):
+                if all_usage_values[j][i].replace('.', '', 1).isdigit():
+                    usage_sheet.update_cell(j + 1, i + 1, '')
+
+    # Update the cells with the new values
+    restock_sheet.update_cells(header_cells)
+
+    """
     # Wipe out usage sheet
     # Get all values in the worksheet
     all_values = usage_sheet.get_all_values()
@@ -250,7 +281,7 @@ def restock():
 
     # Update the cells with the new values
     restock_sheet.update_cells(header_cells)
-
+    """
     """
     products = restock_sheet.row_values(1)
     quantities = []
