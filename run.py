@@ -38,7 +38,7 @@ def consumption(usage_sheet, stock_sheet):
     
     products = usage_sheet.row_values(1)
     numbers = [1, 2, 3, 4, 5, 6]
-    print(Fore.BLUE)
+    print(Fore.GREEN)
     for product, number in zip(products, numbers):
         print(f"{product} = {number}")
     print(Style.RESET_ALL)
