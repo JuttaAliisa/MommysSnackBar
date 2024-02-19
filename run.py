@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from os import system, name
+from colorama import Fore, Back, Style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -23,20 +24,24 @@ def consumption():
     """
     function for inputting consumption values
     """
+    #clear terminal for better readability
+    clear()
+
     # Select the appropriate worksheet
     worksheet = SHEET.worksheet('usage')
 
     # Get user input
-    print('When taking a snack from the stock, please insert correct number for the snack')
+    print('\n When taking a snack from the stock, please insert correct number for the snack \n')
     
     products = worksheet.row_values(1)
     numbers = [1, 2, 3, 4, 5, 6]
     for product, number in zip(products, numbers):
-        print(f"{product} = {number}")
+        print("\033[32m" + f"{product} = {number}")
+        print('\033[39m')
 
-    user_choice = input("What did you take? Enter number: ")
+    user_choice = input("\n What did you take? Enter number: ")
 
-    # Define the values based on user input
+    # Define the values based on user input and validating input
     if user_choice == '1':
         values_to_add = [1, 0, 0, 0, 0, 0]
         cell_value = worksheet.cell(1, 1).value
@@ -56,7 +61,10 @@ def consumption():
         values_to_add = [0, 1, 0, 0, 0, 1]
         cell_value = worksheet.cell(1, 6).value
     else:
-        print("Invalid choice. Please enter a number from 1 through 6")
+        print("\033[31m" + "Invalid choice. Please enter a number from 1 through 6 \n")
+        print("\033[39m")
+        print("Press enter to try again")
+        input()
         consumption()
 
 
@@ -64,17 +72,35 @@ def consumption():
     next_row = len(worksheet.get_all_values()) + 1
     worksheet.append_row(values_to_add)
 
-    print(f"Thank you! 1pc of {cell_value} deleted from SnackBar stock ")
-    print('Do you want to take out another item?')
+    print(f"\n Thank you! 1pc of {cell_value} deleted from SnackBar stock \n")
+    print('Do you want to take out another item? \n')
     user_choice = input("y=yes, n=no: ")
     if user_choice == 'y':
-        print("Please pick another item")
+        print("\n Please pick another item \n")
         consumption()
     elif user_choice == 'n':
-        print("Thank you for your contribution!")
+        print("\n Thank you for your contribution! \n")
+        print("\n Press enter to get back to start")
+        input("")
         start()
     else:
-        print("Invalid choice. Please enter y or n: ")
+        print('\033[31m' + "Invalid choice. Please enter y or n: ")
+        print('\033[39m')
+        print('Do you want to take out another item? \n')
+        user_choice = input("y=yes, n=no: ")
+        if user_choice == 'y':
+            print("\n Please pick another item \n")
+            consumption()
+        elif user_choice == 'n':
+            print("\n Thank you for your contribution! \n")
+            print("\n Press enter to get back to start")
+            input("")
+            start()
+        else:
+            print('\033[31m' + "Invalid choice. Press enter to start again ")
+            print('\033[39m')
+            input("")
+            start()
 
 def stock():
     """
