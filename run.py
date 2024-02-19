@@ -21,31 +21,32 @@ def clear():
     '''
     system('cls' if name == 'nt' else 'clear')
 
-def consumption():
+def consumption(worksheet):
     """
     function for inputting consumption values
     """
     #clear terminal for better readability
     clear()
-
+    """
     # Select the appropriate worksheet
     worksheet = SHEET.worksheet('usage')
     stock_sheet = SHEET.worksheet('stock')
+    """
 
     # Get user input
     print(Fore.MAGENTA)
     print(Style.BRIGHT + "Snack Consumption logging \n")
     print(Style.RESET_ALL)
     print(Fore.BLUE)
-    print('When taking a snack from the stock, please insert correct number for the snack \n')
+    print('When taking a snack from the stock, please insert correct number for the snack')
     print(Style.RESET_ALL)
     
     products = worksheet.row_values(1)
     numbers = [1, 2, 3, 4, 5, 6]
+    print(Fore.BLUE)
     for product, number in zip(products, numbers):
-        print(Fore.BLUE)
         print(f"{product} = {number}")
-        print(Style.RESET_ALL)
+    print(Style.RESET_ALL)
 
     user_choice = input("What did you take? Enter number: ")
 
@@ -74,14 +75,14 @@ def consumption():
         print(Style.RESET_ALL)
         print("Press enter to try again")
         input()
-        consumption()
+        consumption(spreadsheet.worksheet('usage'))
 
 
     # Add the values to the next available row
     worksheet.append_row(values_to_add)
     # Turn the value negative and add to stock sheet
     negative_values = [-x for x in values_to_add]
-    stock_sheet.append_row(negative_values)
+    worksheet.append_row(negative_values)
 
     print(f"\nThank you! 1pc of {cell_value} deleted from SnackBar stock \n")
     print('Do you want to take out another item? \n')
@@ -117,11 +118,6 @@ def stock(worksheet):
     print(Fore.MAGENTA)
     print(Style.BRIGHT + "The current stock is: \n")
     print(Style.RESET_ALL)
-    """
-    # Select the appropriate worksheet
-    stock_sheet = SHEET.worksheet('stock')
-    """
-
     print(Fore.GREEN)
     #print user friendly stock values
     products = worksheet.row_values(1)
@@ -260,7 +256,7 @@ def start():
 
     # Define the values based on user input
     if user_choice == '1':
-        consumption()
+        consumption(spreadsheet.worksheet('usage'))
     elif user_choice == '2':
         restock()
     elif user_choice == '3':
