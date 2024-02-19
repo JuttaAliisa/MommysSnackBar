@@ -1,1 +1,2 @@
 Colorama https://pypi.org/project/colorama/
+openpyxl https://openpyxl.readthedocs.io/en/stable/

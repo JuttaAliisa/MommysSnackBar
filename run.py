@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from os import system, name
 from colorama import Fore, Back, Style
+from openpyxl import load_workbook
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -41,8 +42,9 @@ def consumption():
     products = worksheet.row_values(1)
     numbers = [1, 2, 3, 4, 5, 6]
     for product, number in zip(products, numbers):
-        print("\033[32m" + f"{product} = {number}")
-        print('\033[39m')
+        print(Fore.BLUE)
+        print(f"{product} = {number}")
+        print(Style.RESET_ALL)
 
     user_choice = input("What did you take? Enter number: ")
 
@@ -66,8 +68,9 @@ def consumption():
         values_to_add = [0, 1, 0, 0, 0, 1]
         cell_value = worksheet.cell(1, 6).value
     else:
-        print("\033[31m" + "\nInvalid choice. Please enter a number from 1 through 6 \n")
-        print("\033[39m")
+        print(Fore.RED)
+        print("\nInvalid choice. Please enter a number from 1 through 6 \n")
+        print(Style.RESET_ALL)
         print("Press enter to try again")
         input()
         consumption()
@@ -98,7 +101,9 @@ def consumption():
             start()
             break  # exit the loop after starting again
         else:
-            print('\033[31m' + "Invalid choice. Please enter y or n: " + '\033[39m')
+            print(Fore.RED)
+            print("Invalid choice. Please enter y or n: ")
+            print(Style.RESET_ALL)
 
 def stock():
     """
@@ -221,6 +226,32 @@ def restock():
                 usage_sheet.update_cell(i + 1, j + 1, '')
 
     #request restock amounts
+
+    # Get the header row as a list of Cell objects
+    header_row = restock_sheet.row_values(1)
+    header_cells = restock_sheet.range(2, 1, 2, len(header_row))
+
+    # Get restock amounts from the user with input validation
+    for i, product in enumerate(header_row):
+        while True:
+            try:
+                quantity = int(input(f"How many {product}s restocked: "))
+                # Check if the input is non-negative
+                if quantity >= 0:
+                    break
+                else:
+                    print("Please enter a non-negative number.")
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+        
+        # Check if the input is non-zero before updating the cell
+        if quantity != 0:
+            header_cells[i].value = quantity
+
+    # Update the cells with the new values
+    restock_sheet.update_cells(header_cells)
+
+    """
     products = restock_sheet.row_values(1)
     quantities = []
 
@@ -234,6 +265,7 @@ def restock():
     worksheet = SHEET.worksheet('restock')
     next_row = len(worksheet.get_all_values()) + 1
     worksheet.append_row(quantities)
+    """
     
     print("Restock logged. Thank you for restocking!\n")
     print("Press enter to go back to main page")
