@@ -21,7 +21,7 @@ def clear():
     '''
     system('cls' if name == 'nt' else 'clear')
 
-def consumption(worksheet):
+def consumption(usage_sheet, stock_sheet):
     """
     function for inputting consumption values
     """
@@ -41,7 +41,7 @@ def consumption(worksheet):
     print('When taking a snack from the stock, please insert correct number for the snack')
     print(Style.RESET_ALL)
     
-    products = worksheet.row_values(1)
+    products = usage_sheet.row_values(1)
     numbers = [1, 2, 3, 4, 5, 6]
     print(Fore.BLUE)
     for product, number in zip(products, numbers):
@@ -53,22 +53,22 @@ def consumption(worksheet):
     # Define the values based on user input and validating input
     if user_choice == '1':
         values_to_add = [1, 0, 0, 0, 0, 0]
-        cell_value = worksheet.cell(1, 1).value
+        cell_value = usage_sheet.cell(1, 1).value
     elif user_choice == '2':
         values_to_add = [0, 1, 0, 0, 0, 0]
-        cell_value = worksheet.cell(1, 2).value
+        cell_value = usage_sheet.cell(1, 2).value
     elif user_choice == '3':
         values_to_add = [0, 0, 1, 0, 0, 0]
-        cell_value = worksheet.cell(1, 3).value
+        cell_value = usage_sheet.cell(1, 3).value
     elif user_choice == '4':
         values_to_add = [0, 0, 0, 1, 0, 0]
-        cell_value = worksheet.cell(1, 4).value
+        cell_value = usage_sheet.cell(1, 4).value
     elif user_choice == '5':
         values_to_add = [0, 0, 0, 0, 1, 0]
-        cell_value = worksheet.cell(1, 5).value
+        cell_value = usage_sheet.cell(1, 5).value
     elif user_choice == '6':
         values_to_add = [0, 0, 0, 0, 0, 1]
-        cell_value = worksheet.cell(1, 6).value
+        cell_value = usage_sheet.cell(1, 6).value
     else:
         print(Fore.RED)
         print("\nInvalid choice. Please enter a number from 1 through 6 \n")
@@ -79,10 +79,10 @@ def consumption(worksheet):
 
 
     # Add the values to the next available row
-    worksheet.append_row(values_to_add)
+    usage_sheet.append_row(values_to_add)
     # Turn the value negative and add to stock sheet
     negative_values = [-x for x in values_to_add]
-    worksheet.append_row(negative_values)
+    stock_sheet.append_row(negative_values)
 
     print(f"\nThank you! 1pc of {cell_value} deleted from SnackBar stock \n")
     print('Do you want to take out another item? \n')
@@ -96,7 +96,7 @@ def consumption(worksheet):
         user_choice = get_user_choice()
 
         if user_choice == 'y':
-            consumption()
+            consumption(spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
             break  # exit the loop after consumption
         elif user_choice == 'n':
             print("Thank you for your contribution!\n")
@@ -170,7 +170,7 @@ def recommendation(usage_sheet, stock_sheet, recommendation_sheet):
     input()
     start()
 
-def restock():
+def restock(restock_sheet, usage_sheet, stock_sheet):
     """
     Function to perform restock of the snack bar
     """
@@ -183,11 +183,6 @@ def restock():
     print("Please add stocked amount for every item")
     print(Style.RESET_ALL)
     print(Fore.GREEN)
-
-    # Select the appropriate worksheet
-    restock_sheet = SHEET.worksheet('restock')
-    usage_sheet = SHEET.worksheet('usage')
-    stock_sheet = SHEET.worksheet('stock')
 
     # Get the header row as a list of Cell objects
     header_row = restock_sheet.row_values(1)
@@ -249,9 +244,9 @@ def start():
 
     # Define the values based on user input
     if user_choice == '1':
-        consumption(spreadsheet.worksheet('usage'))
+        consumption(spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
     elif user_choice == '2':
-        restock()
+        restock(spreadsheet.worksheet('restock'), spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
     elif user_choice == '3':
         stock(spreadsheet.worksheet('stock'))
     elif user_choice == '4':
