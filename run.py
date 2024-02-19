@@ -252,12 +252,12 @@ def start():
     elif user_choice == '4':
         recommendation(spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'), spreadsheet.worksheet('recommendation'))
     elif user_choice == '5':
-        stocktaking()
+        stocktaking(spreadsheet)
     else:
         print("Invalid choice. Please enter a number between 1 and 4")
         exit()
 
-def stocktaking():
+def stocktaking(spreadsheet):
     #clear terminal for better readability
     clear()
 
@@ -276,10 +276,6 @@ def stocktaking():
         user_choice = get_user_choice()
 
         if user_choice == 'y':
-            # Select the appropriate worksheets
-            usage_sheet = SHEET.worksheet('usage')
-            stock_sheet = SHEET.worksheet('stock')
-            restock_sheet = SHEET.worksheet('restock')
 
             # Define the ranges to clear
             usage_range = 'A3:ZZ'
@@ -287,13 +283,13 @@ def stocktaking():
             restock_range = 'A2:ZZ'
 
             # Clear everything from the usage sheet starting at row 3
-            usage_sheet.batch_clear([usage_range])
+            spreadsheet.worksheet('usage').batch_clear([usage_range])
 
             # Clear everything from the stock sheet starting at row 3
-            stock_sheet.batch_clear([stock_range])
+            spreadsheet.worksheet('stock').batch_clear([stock_range])
 
             # Clear everything from the restock sheet starting at row 2
-            restock_sheet.batch_clear([restock_range])
+            spreadsheet.worksheet('restock').batch_clear([restock_range])
 
             print("Stockdata has been cleared.\n Please proceed to restocking the actual stock you have by pressing enter")
             input()
@@ -332,6 +328,6 @@ def stocktaking():
 
         print("Stockdata has been cleared.\n Please proceed to restocking the actual stock you have by pressing enter")
         input()
-        restock()
+        restock(spreadsheet.worksheet('restock'), spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
 
 start()
