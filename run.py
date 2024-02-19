@@ -250,6 +250,7 @@ def start():
     print("2: Restock snacks")
     print("3: Check current stock")
     print("4: Get shopping recommendations")
+    print("5: Stocktaking")
     user_choice = input("Enter number: ")
 
     # Define the values based on user input
@@ -261,8 +262,87 @@ def start():
         stock()
     elif user_choice == '4':
         recommendation()
+    elif user_choice == '5':
+        stocktaking()
     else:
         print("Invalid choice. Please enter a number between 1 and 4")
         exit()
+
+def stocktaking():
+    #clear terminal for better readability
+    clear()
+
+    print("Welcome to stocktaking\n")
+    print("If you feel or know that your stock is not accurate, stocktaking will help you")
+    print("Please note that if you proceed with stocktaking, your stock history will be deleted")
+    print("This will affect the recommendations temporarily")
+    print("Want to proceed with stock taking?")
+
+    def get_user_choice():
+        user_choice = input("y=yes, n=no: ")
+        return user_choice.lower()
+
+
+    while True:
+        user_choice = get_user_choice()
+
+        if user_choice == 'y':
+            # Select the appropriate worksheets
+            usage_sheet = SHEET.worksheet('usage')
+            stock_sheet = SHEET.worksheet('stock')
+            restock_sheet = SHEET.worksheet('restock')
+
+            # Define the ranges to clear
+            usage_range = 'A3:ZZ'
+            stock_range = 'A3:ZZ'
+            restock_range = 'A2:ZZ'
+
+            # Clear everything from the usage sheet starting at row 3
+            usage_sheet.batch_clear([usage_range])
+
+            # Clear everything from the stock sheet starting at row 3
+            stock_sheet.batch_clear([stock_range])
+
+            # Clear everything from the restock sheet starting at row 2
+            restock_sheet.batch_clear([restock_range])
+
+            print("Stockdata has been cleared.\n Please proceed to restocking the actual stock you have by pressing enter")
+            input()
+            restock()
+            break  # exit the loop
+        elif user_choice == 'n':
+            print("Stocktaking cancelled")
+            print("Press enter to get back to start\n")
+            input("")
+            start()
+            break  # exit the loop
+        else:
+            print(Fore.RED)
+            print("Invalid choice. Please enter y or n: ")
+            print(Style.RESET_ALL)
+    
+    def stocktake():
+        # Select the appropriate worksheets
+        usage_sheet = SHEET.worksheet('usage')
+        stock_sheet = SHEET.worksheet('stock')
+        restock_sheet = SHEET.worksheet('restock')
+
+        # Define the ranges to clear
+        usage_range = 'A3:ZZ'
+        stock_range = 'A3:ZZ'
+        restock_range = 'A2:ZZ'
+
+        # Clear everything from the usage sheet starting at row 3
+        usage_sheet.batch_clear([usage_range])
+
+        # Clear everything from the stock sheet starting at row 3
+        stock_sheet.batch_clear([stock_range])
+
+        # Clear everything from the restock sheet starting at row 2
+        restock_sheet.batch_clear([restock_range])
+
+        print("Stockdata has been cleared.\n Please proceed to restocking the actual stock you have by pressing enter")
+        input()
+        restock()
 
 start()
