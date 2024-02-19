@@ -30,6 +30,7 @@ def consumption():
 
     # Select the appropriate worksheet
     worksheet = SHEET.worksheet('usage')
+    stock_sheet = SHEET.worksheet('stock')
 
     # Get user input
     print(Fore.MAGENTA)
@@ -65,7 +66,7 @@ def consumption():
         values_to_add = [0, 0, 0, 0, 1, 0]
         cell_value = worksheet.cell(1, 5).value
     elif user_choice == '6':
-        values_to_add = [0, 1, 0, 0, 0, 1]
+        values_to_add = [0, 0, 0, 0, 0, 1]
         cell_value = worksheet.cell(1, 6).value
     else:
         print(Fore.RED)
@@ -77,8 +78,10 @@ def consumption():
 
 
     # Add the values to the next available row
-    next_row = len(worksheet.get_all_values()) + 1
     worksheet.append_row(values_to_add)
+    # Turn the value negative and add to stock sheet
+    negative_values = [-x for x in values_to_add]
+    stock_sheet.append_row(negative_values)
 
     print(f"\nThank you! 1pc of {cell_value} deleted from SnackBar stock \n")
     print('Do you want to take out another item? \n')
@@ -250,54 +253,7 @@ def restock():
     restock_sheet.update_cells(header_cells)
     stock_sheet.append_row(restock_values)
 
-    """
-    # Wipe out usage sheet
-    # Get all values in the worksheet
-    all_values = usage_sheet.get_all_values()
-    # Loop through each row starting from the third row
-    for i in range(2, len(all_values)):
-        # Loop through each cell in the row
-        for j in range(len(all_values[i])):
-            # Check if the cell value is a number and delete it
-            if all_values[i][j].replace('.', '', 1).isdigit():
-                usage_sheet.update_cell(i + 1, j + 1, '')
-
-    #request restock amounts
-
-    # Get the header row as a list of Cell objects
-    header_row = restock_sheet.row_values(1)
-    header_cells = restock_sheet.range(2, 1, 2, len(header_row))
-
-    # Get restock amounts from the user with input validation
-    for i, product in enumerate(header_row):
-        while True:
-            try:
-                quantity = int(input(f"How many {product}s restocked: "))
-                # Check if the input is non-negative
-                if quantity >= 0:
-                    break
-                else:
-                    print("Please enter a non-negative number.")
-            except ValueError:
-                print("Invalid input. Please enter a valid number.")
-        
-        # Check if the input is non-zero before updating the cell
-        if quantity != 0:
-            header_cells[i].value = quantity
-
-    # Update the cells with the new values
-    restock_sheet.update_cells(header_cells)
-    """
-    """
-    products = restock_sheet.row_values(1)
-    quantities = []
-
-    # Add the values to the next available row
-    worksheet = SHEET.worksheet('restock')
-    next_row = len(worksheet.get_all_values()) + 1
-    worksheet.append_row(quantities)
-    """
-    
+    print(Style.RESET_ALL)
     print("Restock logged. Thank you for restocking!\n")
     print("Press enter to go back to main page")
     input()
