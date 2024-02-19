@@ -194,10 +194,15 @@ def restock():
     """
     Function to perform restock of the snack bar
     """
-    print("Welcome to restock feature!")
-    print("")
+    #clear terminal for better readability
+    clear()
+    print(Fore.MAGENTA)
+    print(Style.BRIGHT + "Welcome to restock feature!")
+    print(Style.RESET_ALL)
+    print(Fore.BLUE)
     print("Please add stocked amount for every item")
-    print("")
+    print(Style.RESET_ALL)
+    print(Fore.GREEN)
 
     # Select the appropriate worksheet
     restock_sheet = SHEET.worksheet('restock')
@@ -223,12 +228,17 @@ def restock():
         quantity = int(input(f"How many {product}s restocked: "))
         quantities.append(quantity)
     
-    print(quantities)
+    print(Style.RESET_ALL)
 
     # Add the values to the next available row
     worksheet = SHEET.worksheet('restock')
     next_row = len(worksheet.get_all_values()) + 1
     worksheet.append_row(quantities)
+    
+    print("Restock logged. Thank you for restocking!\n")
+    print("Press enter to go back to main page")
+    input()
+    start()
 
 def start():
     clear()
