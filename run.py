@@ -104,9 +104,11 @@ def stock():
     """
     Function to check current stock value
     """
-    print("")
-    print("The current stock is:")
-    print("")
+    #clear terminal for better readability
+    clear()
+    print(Fore.MAGENTA)
+    print(Style.BRIGHT + "The current stock is: \n")
+    print(Style.RESET_ALL)
     # Select the appropriate worksheet
     usage_sheet = SHEET.worksheet('usage')
     restock_sheet = SHEET.worksheet('restock').get_all_values()
@@ -132,7 +134,13 @@ def stock():
     stock_sheet = SHEET.worksheet('stock').get_all_values()
     amounts = stock_sheet[-1]
     for product, amount in zip(products, amounts):
+        print(Fore.GREEN)
         print(f"{product}: {amount}pc")
+        print(Style.RESET_ALL)
+
+    print("\nPress enter to go back to main page")
+    input()
+    start()
         
 def recommendation():
     """
