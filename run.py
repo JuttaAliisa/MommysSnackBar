@@ -27,11 +27,6 @@ def consumption(usage_sheet, stock_sheet):
     """
     #clear terminal for better readability
     clear()
-    """
-    # Select the appropriate worksheet
-    worksheet = SHEET.worksheet('usage')
-    stock_sheet = SHEET.worksheet('stock')
-    """
 
     # Get user input
     print(Fore.MAGENTA)
@@ -48,7 +43,7 @@ def consumption(usage_sheet, stock_sheet):
         print(f"{product} = {number}")
     print(Style.RESET_ALL)
 
-    user_choice = input("What did you take? Enter number: ")
+    user_choice = input("What did you take? Enter number: \n")
 
     # Define the values based on user input and validating input
     if user_choice == '1':
@@ -71,7 +66,7 @@ def consumption(usage_sheet, stock_sheet):
         cell_value = usage_sheet.cell(1, 6).value
     else:
         print(Fore.RED)
-        print("\nInvalid choice. Please enter a number from 1 through 6 \n")
+        print("Invalid choice. Please enter a number from 1 through 6")
         print(Style.RESET_ALL)
         print("Press enter to try again")
         input()
@@ -84,11 +79,13 @@ def consumption(usage_sheet, stock_sheet):
     negative_values = [-x for x in values_to_add]
     stock_sheet.append_row(negative_values)
 
-    print(f"\nThank you! 1pc of {cell_value} deleted from SnackBar stock \n")
+    print(f"\nThank you! 1pc of {cell_value} deleted from SnackBar stock")
+    print(Fore.BLUE)
     print('Do you want to take out another item? \n')
+    print(Style.RESET_ALL)
 
     def get_user_choice():
-        user_choice = input("y=yes, n=no: ")
+        user_choice = input("y=yes, n=no: \n")
         return user_choice.lower()
 
 
@@ -101,7 +98,7 @@ def consumption(usage_sheet, stock_sheet):
         elif user_choice == 'n':
             print("Thank you for your contribution!\n")
             print("Press enter to get back to start\n")
-            input("")
+            input()
             start()
             break  # exit the loop after starting again
         else:
@@ -116,7 +113,7 @@ def stock(worksheet):
     #clear terminal for better readability
     clear()
     print(Fore.MAGENTA)
-    print(Style.BRIGHT + "The current stock is: \n")
+    print(Style.BRIGHT + "The current stock is:")
     print(Style.RESET_ALL)
     print(Fore.GREEN)
     #print user friendly stock values
@@ -198,14 +195,18 @@ def restock(restock_sheet, usage_sheet, stock_sheet):
     for i, product in enumerate(header_row):
         while True:
             try:
-                quantity = int(input(f"How many {product}s restocked: "))
+                quantity = int(input(f"How many {product}s restocked: \n"))
                 # Check if the input is non-negative
                 if quantity >= 0:
                     break
                 else:
+                    print(Fore.RED)
                     print("Please enter a non-negative number.")
+                    print(Style.RESET_ALL)
             except ValueError:
+                print(Fore.RED)
                 print("Invalid input. Please enter a valid number.")
+                print(Style.RESET_ALL)
 
         # Check if the input is non-zero before updating the cells
         if quantity != 0:
@@ -228,17 +229,22 @@ def restock(restock_sheet, usage_sheet, stock_sheet):
 
 def start():
     clear()
+    print(Fore.MAGENTA + Style.BRIGHT)
     print("Welcome to Mommy's SnackBar Stock Helper")
+    print(Style.RESET_ALL)
     print("Help Mom and log your activity around snack bar.")
     print("This way we can make sure none of is left with out a snack aver again!")
-    print("")
+    print(Fore.GREEN)
     print("Would you like to:")
     print("1: Take a snack")
     print("2: Restock snacks")
     print("3: Check current stock")
     print("4: Get shopping recommendations")
     print("5: Stocktaking")
-    user_choice = input("Enter number: ")
+    print(Style.RESET_ALL)
+    print(Fore.BLUE)
+    user_choice = input("Enter number: \n")
+    print(Style.RESET_ALL)
 
     spreadsheet = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
 
@@ -268,7 +274,7 @@ def stocktaking(spreadsheet):
     print("Want to proceed with stock taking?")
 
     def get_user_choice():
-        user_choice = input("y=yes, n=no: ")
+        user_choice = input("y=yes, n=no: \n")
         return user_choice.lower()
 
 
@@ -293,41 +299,17 @@ def stocktaking(spreadsheet):
 
             print("Stockdata has been cleared.\n Please proceed to restocking the actual stock you have by pressing enter")
             input()
-            restock()
+            restock(spreadsheet.worksheet('restock'), spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
             break  # exit the loop
         elif user_choice == 'n':
             print("Stocktaking cancelled")
             print("Press enter to get back to start\n")
-            input("")
+            input()
             start()
             break  # exit the loop
         else:
             print(Fore.RED)
             print("Invalid choice. Please enter y or n: ")
             print(Style.RESET_ALL)
-    
-    def stocktake():
-        # Select the appropriate worksheets
-        usage_sheet = SHEET.worksheet('usage')
-        stock_sheet = SHEET.worksheet('stock')
-        restock_sheet = SHEET.worksheet('restock')
-
-        # Define the ranges to clear
-        usage_range = 'A3:ZZ'
-        stock_range = 'A3:ZZ'
-        restock_range = 'A2:ZZ'
-
-        # Clear everything from the usage sheet starting at row 3
-        usage_sheet.batch_clear([usage_range])
-
-        # Clear everything from the stock sheet starting at row 3
-        stock_sheet.batch_clear([stock_range])
-
-        # Clear everything from the restock sheet starting at row 2
-        restock_sheet.batch_clear([restock_range])
-
-        print("Stockdata has been cleared.\n Please proceed to restocking the actual stock you have by pressing enter")
-        input()
-        restock(spreadsheet.worksheet('restock'), spreadsheet.worksheet('usage'), spreadsheet.worksheet('stock'))
 
 start()
