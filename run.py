@@ -146,9 +146,13 @@ def recommendation():
     """
     Function to calculate purchase recommendation
     """
-    print("")
+    #clear terminal for better readability
+    clear()
+    print(Fore.MAGENTA)
+    print(Style.BRIGHT + "Restock recommendations for a shopping trip \n")
+    print(Style.RESET_ALL)
     print("Please consider purchasing the following snacks to make sure the stock lasts:")
-    print("")
+    print(Fore.GREEN)
 
     # Select the appropriate worksheet
     usage_sheet = SHEET.worksheet('usage')
@@ -181,6 +185,10 @@ def recommendation():
             print(f"{product}: {amount}pc")
         else:
             print(f"{product} has enough stock")
+    print(Style.RESET_ALL)
+    print("\nPress enter to go back to main page")
+    input()
+    start()
 
 def restock():
     """
