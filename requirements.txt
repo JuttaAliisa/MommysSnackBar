@@ -1,1 +1,1 @@
-# Your requirements go here
+Colorama https://pypi.org/project/colorama/
