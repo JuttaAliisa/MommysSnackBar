@@ -13,7 +13,7 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('mommys_snackbar_helper')
+SPREADSHEET_NAME = 'mommys_snackbar_helper'
 
 def clear():
     '''
@@ -108,7 +108,7 @@ def consumption():
             print("Invalid choice. Please enter y or n: ")
             print(Style.RESET_ALL)
 
-def stock():
+def stock(worksheet):
     """
     Function to check current stock value
     """
@@ -117,13 +117,15 @@ def stock():
     print(Fore.MAGENTA)
     print(Style.BRIGHT + "The current stock is: \n")
     print(Style.RESET_ALL)
+    """
     # Select the appropriate worksheet
     stock_sheet = SHEET.worksheet('stock')
+    """
 
     print(Fore.GREEN)
     #print user friendly stock values
-    products = stock_sheet.row_values(1)
-    amounts = stock_sheet.row_values(2)
+    products = worksheet.row_values(1)
+    amounts = worksheet.row_values(2)
     for product, amount in zip(products, amounts):
         print(f"{product}: {amount}pc")
     print(Style.RESET_ALL)
@@ -254,13 +256,15 @@ def start():
     print("5: Stocktaking")
     user_choice = input("Enter number: ")
 
+    spreadsheet = GSPREAD_CLIENT.open(SPREADSHEET_NAME)
+
     # Define the values based on user input
     if user_choice == '1':
         consumption()
     elif user_choice == '2':
         restock()
     elif user_choice == '3':
-        stock()
+        stock(spreadsheet.worksheet('stock'))
     elif user_choice == '4':
         recommendation()
     elif user_choice == '5':
