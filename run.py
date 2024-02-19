@@ -119,7 +119,7 @@ def stock():
     print(Style.RESET_ALL)
     # Select the appropriate worksheet
     stock_sheet = SHEET.worksheet('stock')
-    
+
     print(Fore.GREEN)
     #print user friendly stock values
     products = stock_sheet.row_values(1)
@@ -162,7 +162,6 @@ def recommendation():
 
     # Add the values to the next available row
     worksheet = SHEET.worksheet('recommendation')
-    next_row = len(worksheet.get_all_values()) + 1
     worksheet.append_row(recommendation_values)
 
     #print user friendly recommendation list
