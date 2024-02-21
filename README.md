@@ -102,7 +102,18 @@ The program has multiple features to help the mom to stay on track with snacks. 
 <hr>
 
 ## TESTING
-IMPORT TESTING
+
+### Diagnostics
+
+- HTML
+  - No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fmommys-snackbar-helper-264f000fb5c5.herokuapp.com%2F)
+- CSS
+  - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fmommys-snackbar-helper-264f000fb5c5.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
+- Lighthouse
+  - Accessibility 100
+  - Best practises 100
+  - SEO 100
+  - performance 48/100 mainly because of bad image optimazation (next sprint agenda)
 
 ## MODULES IMPORTED
 * <b>google.oauth2.service_account</b> for using the<code> Credentials </code> function on "creds.json" file that was used to link the program with the Google spreadsheet using the <b>gspread</b> module
