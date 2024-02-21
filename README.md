@@ -113,7 +113,7 @@ The program has multiple features to help the mom to stay on track with snacks. 
   - Accessibility 100
   - Best practises 100
   - SEO 100
-  - performance 48/100 mainly because of bad image optimazation (next sprint agenda)
+  - performance 81/100
 
 ## MODULES IMPORTED
 * <b>google.oauth2.service_account</b> for using the<code> Credentials </code> function on "creds.json" file that was used to link the program with the Google spreadsheet using the <b>gspread</b> module
