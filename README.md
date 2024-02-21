@@ -27,7 +27,7 @@ I created a snackbar stockkeeping system for a busy mom. It helps to stay on tra
 Click [HERE](https://mommys-snackbar-helper-264f000fb5c5.herokuapp.com/) to access the fully deployed project.<br>
 <hr>
 
-[![N|Solid](assets/start.JPG)](assets/start.JPG)
+![Starting point](images/start.png)
 <hr>
 
 ## UX/UI
@@ -76,18 +76,18 @@ INSERT FLOWCHART
 The program has multiple features to help the mom to stay on track with snacks. The system is linked to a Google Spreedsheet that can be accessed [here](https://docs.google.com/spreadsheets/d/1V5KxuSG989F_jIA8baz2xVtmK4HBiJFcZXgDuEIHiJA/edit?usp=sharing).<br>
 
 * The program will push the values to the spreadsheet every time valid information is provided <br>
-    <img src="images/consumption.JPG" width="50%">
-    <img src="images/restock.JPG" width="50%"><br>
+    ![Consumption image](images/consumption.JPG)
+    ![Restock image](images/restock.JPG)
 
 * Validation features give the user feedback if uncorrect values are provided.<br>
-    <img src="images/validation1.JPG">
-    <img src="images/validation2.JPG">
+    ![Validation error1](images/validation1.JPG)
+    ![Validation error2](images/validation2.JPG)
 
 * The user has a possibility to check current stock at any point<br>
-    <img src="images/currentstock.JPG">
+    ![Current stock image](images/currentstock.JPG)
 
 * User can reset the system by using stocktaking feature<br>
-    <img src="images/stocktaking.JPG" width="40%">
+    ![Stocktaking feature](images/stocktaking.JPG)
 
 
 ### FUTURE FEATURES<br>
