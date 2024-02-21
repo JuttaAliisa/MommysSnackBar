@@ -293,13 +293,19 @@ def stocktaking(spreadsheet):
     # Clear terminal for better readability
     clear()
 
-    print("Welcome to stocktaking\n")
+    print(Fore.MAGENTA)
+    print(Style.BRIGHT + "Welcome to stocktaking")
+    print(Style.RESET_ALL)
     print("If you feel or know that your stock is not accurate,")
-    print("stocktaking will help you\n")
+    print("stocktaking will help you")
+    print(Fore.RED)
     print("Please note that if you proceed with stocktaking,")
     print("your stock history will be deleted")
-    print("This will affect the recommendations temporarily\n")
+    print(Style.RESET_ALL)
+    print("This will affect the recommendations temporarily")
+    print(Fore.BLUE)
     print("Want to proceed with stock taking?")
+    print(Style.RESET_ALL)
 
     def get_user_choice():
         user_choice = input("y=yes, n=no: \n")
