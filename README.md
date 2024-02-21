@@ -157,6 +157,7 @@ For creating a clone of the repository on your local machine, use<b>Clone</b>:
 [Heroku](https://dashboard.heroku.com/) - used for deploying the project<br>
 [HTML - W3C HTML Validator](https://validator.w3.org/#validate_by_uri+with_options) - used for validating the HTML<br>
 [CSS - Jigsaw CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_uri) - used for validating the CSS<br>
+[FIGMA](https://www.figma.com/) - used to create wireframes <br>
 
 ## ACKNOWLEDGEMENTS
 - My everloving husband for granting me the time to make this project and further my education
