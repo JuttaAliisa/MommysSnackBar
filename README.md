@@ -62,7 +62,7 @@ To be able to accommodate the needs I have planned the following features:<br>
 * The program displays warnings when the input are not in line with expected answers<br>
 
 ### STRUCTURE<br>
-The ordering system can be used by the client through a mock terminal that appears when the link is accessed.
+The ordering system can be used by the client through a mock terminal.
 The terminal was created using the Code Institute template found [HERE](https://github.com/Code-Institute-Org/p3-template)
 The program was made using Python as the programming language. The entire code can be found from run.py file.
 Heroku is running the program
