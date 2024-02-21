@@ -115,6 +115,19 @@ The program has multiple features to help the mom to stay on track with snacks. 
   - SEO 100
   - performance 81/100
 
+### Manual testing
+
+To ensure that the site works, I tested it manually with multiple devices and browsers:
+
+- Lenovo Legion laptop
+- Macbook pro 13"
+- Safari
+- Chrome
+No problems were found
+
+The app was tested by a 7-year-old and a 12-year-old user to confirm the usability for children.
+Both could navigate the app without verbal instructions.
+
 ## MODULES IMPORTED
 * <b>google.oauth2.service_account</b> for using the<code> Credentials </code> function on "creds.json" file that was used to link the program with the Google spreadsheet using the <b>gspread</b> module
 * <b>os</b> module was imported for accessing <code>os.system</code> to clear the terminal
