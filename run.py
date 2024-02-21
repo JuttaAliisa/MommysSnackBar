@@ -2,7 +2,6 @@ import gspread
 from google.oauth2.service_account import Credentials
 from os import system, name
 from colorama import Fore, Back, Style
-from openpyxl import load_workbook
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -14,7 +13,6 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SPREADSHEET_NAME = 'mommys_snackbar_helper'
-
 
 def clear():
     """
@@ -242,7 +240,9 @@ def restock(restock_sheet, usage_sheet, stock_sheet):
 def start():
     clear()
     print(Fore.MAGENTA + Style.BRIGHT)
-    print("Welcome to Mommy's SnackBar Stock Helper")
+    print("Welcome to")
+    print("🅜 🅞 🅜 🅜 🅨 ❜ 🅢")
+    print("SnackBar Stock Helper")
     print(Style.RESET_ALL)
     print("Help Mom and log your activity around snack bar.")
     print("This way we can make sure none of us is left with out a snack ever again!")
