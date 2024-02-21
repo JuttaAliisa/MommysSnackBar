@@ -76,18 +76,18 @@ INSERT FLOWCHART
 The program has multiple features to help the mom to stay on track with snacks. The system is linked to a Google Spreedsheet that can be accessed [here](https://docs.google.com/spreadsheets/d/1V5KxuSG989F_jIA8baz2xVtmK4HBiJFcZXgDuEIHiJA/edit?usp=sharing).<br>
 
 * The program will push the values to the spreadsheet every time valid information is provided <br>
-    ![Consumption image](images/consumption.JPG)
-    ![Restock image](images/restock.JPG)
+![Consumption image](images/consumption.JPG)
+![Restock image](images/restock.JPG)
 
 * Validation features give the user feedback if uncorrect values are provided.<br>
-    ![Validation error1](images/validation1.JPG)
-    ![Validation error2](images/validation2.JPG)
+![Validation error1](images/validation1.JPG)
+![Validation error2](images/validation2.JPG)
 
 * The user has a possibility to check current stock at any point<br>
-    ![Current stock image](images/currentstock.JPG)
+![Current stock image](images/currentstock.JPG)
 
 * User can reset the system by using stocktaking feature<br>
-    ![Stocktaking feature](images/stocktaking.JPG)
+![Stocktaking feature](images/stocktaking.JPG)
 
 
 ### FUTURE FEATURES<br>
@@ -146,6 +146,7 @@ For creating a clone of the repository on your local machine, use<b>Clone</b>:
 ## CREDITS
 * The code for linking to the Google Spreadsheet and manipulating it was taken and adapted from the Code Institute Love Sandwiches tutorial
 * The code for clearing the terminal was taken from [stackoverflow](https://stackoverflow.com/questions/2084508/clear-terminal-in-python)
+* Instructions and inspiration (but no direct copy of the code) has been searched from https://stackoverflow.com/ and https://www.w3schools.com/ together with Code Institute tutorials from full stack development course.
   
 <hr>
 
@@ -158,6 +159,7 @@ For creating a clone of the repository on your local machine, use<b>Clone</b>:
 [CSS - Jigsaw CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_uri) - used for validating the CSS<br>
 
 ## ACKNOWLEDGEMENTS
-- Code Institute for all the material and support offered<br>
-- Slack community for great involvement in helping each other<br>
+- My everloving husband for granting me the time to make this project and further my education
+- Code Institute for the opportunity
+- My fellow OCT 2023 group for mental and peer support
 <hr>
