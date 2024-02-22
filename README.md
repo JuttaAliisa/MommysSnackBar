@@ -68,7 +68,7 @@ The program was made using Python as the programming language. The entire code c
 Heroku is running the program
 
 ### FLOWCHARTS<br>
-INSERT FLOWCHART
+![Flowchart](images/chart.png)
 
 
 ## FEATURES
@@ -157,7 +157,7 @@ After finishing developing the program I deployed it on <b>Heroku</b> following 
 
 ### FORK THE REPOSITORY 
 For creating a copy of the repository on your account and change it without affecting the original project please use Fork
-- On [My Repository Page](https://github.com/useriasminna/american_pizza_order_system), press <i>Fork</i> in the top right of the page
+- On [My Repository Page](https://github.com/JuttaAliisa/MommysSnackBar), press <i>Fork</i> in the top right of the page
 - A forked version of my project will appear in your own repository<br></br>
 
 ### CLONE THE REPOSITORY
@@ -172,7 +172,7 @@ For creating a clone of the repository on your local machine, use<b>Clone</b>:
 ## CREDITS
 * The code for linking to the Google Spreadsheet and manipulating it was taken and adapted from the Code Institute Love Sandwiches tutorial
 * The code for clearing the terminal was taken from [stackoverflow](https://stackoverflow.com/questions/2084508/clear-terminal-in-python)
-* Instructions and inspiration (but no direct copy of the code) has been searched from https://stackoverflow.com/ and https://www.w3schools.com/ together with Code Institute tutorials from full stack development course.
+* Instructions and inspiration (but no direct copy of the code) has been researched from https://stackoverflow.com/ and https://www.w3schools.com/ together with Code Institute tutorials from full stack development course.
   
 <hr>
 
