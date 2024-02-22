@@ -16,7 +16,7 @@ SPREADSHEET_NAME = 'mommys_snackbar_helper'
 
 def clear():
     """
-    Clears terminal
+    Clears terminal. Code from stackoverflow, check readme
     """
     system('cls' if name == 'nt' else 'clear')
 
