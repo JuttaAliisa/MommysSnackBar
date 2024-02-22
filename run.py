@@ -198,7 +198,7 @@ def restock(restock_sheet, usage_sheet, stock_sheet):
     # Get all values in the usage sheet
     all_usage_values = usage_sheet.get_all_values()
 
-    # Get restock amounts from the user
+    # Get restock amounts (0 or larger) from the user
     for i, product in enumerate(header_row):
         while True:
             try:

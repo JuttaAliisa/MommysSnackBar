@@ -76,18 +76,18 @@ INSERT FLOWCHART
 The program has multiple features to help the mom to stay on track with snacks. The system is linked to a Google Spreedsheet that can be accessed [here](https://docs.google.com/spreadsheets/d/1V5KxuSG989F_jIA8baz2xVtmK4HBiJFcZXgDuEIHiJA/edit?usp=sharing).<br>
 
 * The program will push the values to the spreadsheet every time valid information is provided <br>
-![Consumption image](images/consumption.JPG)
-![Restock image](images/restock.JPG)
+![Consumption image](images/consumption.png)
+![Restock image](images/restock.ong)
 
 * Validation features give the user feedback if uncorrect values are provided.<br>
-![Validation error1](images/validation1.JPG)
-![Validation error2](images/validation2.JPG)
+![Validation error1](images/validation1.png)
+![Validation error2](images/validation2.png)
 
 * The user has a possibility to check current stock at any point<br>
-![Current stock image](images/currentstock.JPG)
+![Current stock image](images/currentstock.png)
 
 * User can reset the system by using stocktaking feature<br>
-![Stocktaking feature](images/stocktaking.JPG)
+![Stocktaking feature](images/stocktaking.png)
 
 
 ### FUTURE FEATURES<br>
