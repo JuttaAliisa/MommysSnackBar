@@ -114,6 +114,8 @@ The program has multiple features to help the mom to stay on track with snacks. 
   - Best practises 100
   - SEO 100
   - performance 81/100
+- Python validation 
+  - No problems when validating with [pycodestyle validator](https://pycodestyle.pycqa.org/en/latest/intro.html#id5)
 
 ### Manual testing
 
@@ -175,13 +177,13 @@ For creating a clone of the repository on your local machine, use<b>Clone</b>:
 <hr>
 
 ## TOOLS
-[GitHub](https://github.com/) - used for hosting the source code of the program<br>
-[Gitpod Dev Environment](https://gitpod.io/) - used for testing the program<br>
-[pycodestyle validator](https://pycodestyle.pycqa.org/en/latest/intro.html#id5) - used for validating the python code<br>
-[Heroku](https://dashboard.heroku.com/) - used for deploying the project<br>
-[HTML - W3C HTML Validator](https://validator.w3.org/#validate_by_uri+with_options) - used for validating the HTML<br>
-[CSS - Jigsaw CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_uri) - used for validating the CSS<br>
-[FIGMA](https://www.figma.com/) - used to create wireframes <br>
+[GitHub](https://github.com/) - used for hosting the source code of the program
+[Gitpod Dev Environment](https://gitpod.io/) - used for testing the program
+[pycodestyle validator](https://pycodestyle.pycqa.org/en/latest/intro.html#id5) - used for validating the python code
+[Heroku](https://dashboard.heroku.com/) - used for deploying the project
+[HTML - W3C HTML Validator](https://validator.w3.org/#validate_by_uri+with_options) - used for validating the HTML
+[CSS - Jigsaw CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_uri) - used for validating the CSS
+[FIGMA](https://www.figma.com/) - used to create wireframes
 
 ## ACKNOWLEDGEMENTS
 - My everloving husband for granting me the time to make this project and further my education
